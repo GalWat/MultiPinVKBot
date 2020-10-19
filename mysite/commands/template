@@ -1,0 +1,11 @@
+import command_system
+
+def _():
+   text = ''
+   return text
+
+command = command_system.Command()
+
+command.keys = ['']
+command.description = ''
+command.process = _
