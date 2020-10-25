@@ -1,7 +1,6 @@
 import os
 import importlib
 
-import sentry_sdk
 import monitoring
 
 import vkapi

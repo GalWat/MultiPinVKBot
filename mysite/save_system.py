@@ -4,7 +4,7 @@ import vkapi
 
 pinned_messages = {}
 
-def add(data):
+def add(data):  # Silence global statement issue (will be fixed in future) skipcq: PYL-W0603
     global pinned_messages
     peer_id = data['peer_id']
     pinned_messages.setdefault(peer_id, [])
