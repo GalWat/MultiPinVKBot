@@ -1,9 +1,11 @@
 import os
 import importlib
 
+import sentry_sdk
+import monitoring
+
 import vkapi
-from command_system import command_list
-from event_system import event_list
+from handlers_system import command_list, event_list
 
 
 def load_modules(module_type):
@@ -13,6 +15,7 @@ def load_modules(module_type):
         importlib.import_module(f"{module_type}.{m[0:-3]}")
 
 
+@monitoring.transaction
 def invoke_event(data):
     key = data['action']['type']
     text = ''
@@ -22,6 +25,7 @@ def invoke_event(data):
     return text
 
 
+@monitoring.transaction
 def invoke_command(data):
     key = data['text'].lower()
     text = ''

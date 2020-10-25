@@ -1,4 +1,4 @@
-import event_system
+import handlers_system
 import save_system
 
 def add_pin(data):
@@ -6,8 +6,8 @@ def add_pin(data):
     text = f'Сообщение добавлено в список: {data["action"]["message"]}'
     return text
 
-event = event_system.Event()
+event_handler = handlers_system.EventHandler()
 
-event.keys = ['chat_pin_message']
-event.description = ''
-event.process = add_pin
+event_handler.keys = ['chat_pin_message']
+event_handler.description = ''
+event_handler.process = add_pin

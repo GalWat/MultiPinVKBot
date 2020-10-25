@@ -1,11 +1,11 @@
-import command_system
+import handlers_system
 
 def hello(*_):
    text = 'Привет!'
    return text
 
-command = command_system.Command()
+command_handler = handlers_system.CommandHandler()
 
-command.keys = ['привет']
-command.description = 'приветствует вас'
-command.process = hello
+command_handler.keys = ['привет']
+command_handler.description = 'приветствует вас'
+command_handler.process = hello

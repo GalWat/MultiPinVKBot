@@ -1,4 +1,2 @@
-.vscode
 *__pycache__*
-mysite/settings.py
-.env
+*/settings.py
