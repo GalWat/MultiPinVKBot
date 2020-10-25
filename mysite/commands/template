@@ -1,11 +1,11 @@
-import command_system
+import handlers_system
 
 def _():
    text = ''
    return text
 
-command = command_system.Command()
+command_handler = handlers_system.CommandHandler()
 
-command.keys = ['']
-command.description = ''
-command.process = _
+command_handler.keys = ['']
+command_handler.description = ''
+command_handler.process = _

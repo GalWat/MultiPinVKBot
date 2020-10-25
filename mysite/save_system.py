@@ -1,10 +1,8 @@
-import json
 import datetime
 
 import vkapi
 
 pinned_messages = {}
-
 
 def add(data):
     global pinned_messages
@@ -16,15 +14,14 @@ def add(data):
             )['items'][0]
     date = datetime.datetime.fromtimestamp(message['date'])
     pinned_messages[peer_id].append( (date.strftime('%Y-%m-%d %H:%M'), message['text']) )
-    # write_to_file()
 
 
-def remove(data):
+def remove(data): # Silence unused variable issue: skipcq: PYL-W0613
     pass
 
 
-def get_list(peer_id):
-    return pinned_messages[peer_id]
+def get_pinned(peer_id):
+    return pinned_messages.get(peer_id, [])
 
 
 
