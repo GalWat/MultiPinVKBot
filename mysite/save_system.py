@@ -24,6 +24,3 @@ def remove(data):  # Silence unused variable issue: skipcq: PYL-W0613
 
 def get_pinned(peer_id):
     return pinned_messages.get(peer_id, [])
-
-
-# read_from_file()
