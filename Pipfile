@@ -9,6 +9,8 @@ verify_ssl = true
 vk = "*"
 sentry-sdk = "*"
 Flask = "*"
+blinker = "*"
+python-dotenv = "*"
 
 [requires]
 python_version = "3.8"

@@ -8,7 +8,7 @@ from handlers_system import command_list, event_list
 
 
 def load_modules(module_type):
-    files = os.listdir(f"mysite/{module_type}")
+    files = os.listdir(f"bot/{module_type}")
     modules = filter(lambda x: x.endswith(".py"), files)
     for m in modules:
         importlib.import_module(f"{module_type}.{m[0:-3]}")
