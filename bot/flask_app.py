@@ -1,7 +1,5 @@
 import settings
-
 import sentry_sdk
-from flask import Flask, request, json
 from sentry_sdk.integrations.flask import FlaskIntegration
 
 sentry_sdk.init(
@@ -9,12 +7,19 @@ sentry_sdk.init(
     integrations=[FlaskIntegration()],
     traces_sample_rate=0.0,
     release=settings.RELEASE,
+    environment=settings.ENV
 )
 
+from flask import Flask, request, json
 import message_handler
 
 
 app = Flask(__name__)
+
+
+@app.route('/debug-sentry')
+def raise_error():
+    1 / 0
 
 
 @app.route('/')
@@ -32,7 +37,6 @@ def processing():
     if data['type'] == 'confirmation':
         return settings.CONFIRM_TOKEN
     if data['type'] == 'message_new':
-        message_handler.respond(data['object']['message'])
-        return 'ok'
+        return 'ok' if message_handler.respond(data['object']['message']) else 'error'
 
     return 'Unsupported Media Type'
