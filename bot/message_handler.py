@@ -37,7 +37,9 @@ def respond(data: dict) -> bool:
     load_modules("command-handlers")
     load_modules("event-handlers")
 
-    peer_id = data["peer_id"]  # Conversation or user id (depends on where message received)
+    peer_id = data[
+        "peer_id"
+    ]  # Conversation or user id (depends on where message received)
     reply_to = data["id"]
 
     text = ""

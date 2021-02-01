@@ -1,6 +1,7 @@
 import functools
 import sentry_sdk
 
+
 def transaction(func):
     @functools.wraps(func)
     def wrapper(*args, **kwargs):
