@@ -1,10 +1,11 @@
 command_list = []
 event_list = []
 
+
 class Handler:
     def __init__(self):
-       self.__keys = []
-       self.description = ''
+        self.__keys = []
+        self.description = ''
 
     @property
     def keys(self):
@@ -20,12 +21,12 @@ class Handler:
 
 
 class CommandHandler(Handler):
-   def __init__(self):
-       super().__init__()
-       command_list.append(self)
+    def __init__(self):
+        super().__init__()
+        command_list.append(self)
 
 
 class EventHandler(Handler):
     def __init__(self):
-       super().__init__()
-       event_list.append(self)
+        super().__init__()
+        event_list.append(self)

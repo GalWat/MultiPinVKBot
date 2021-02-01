@@ -19,7 +19,7 @@ app = Flask(__name__)
 
 @app.route('/debug-sentry')
 def raise_error():
-    error = 1 / 0
+    1 / 0
 
 
 @app.route('/')
@@ -37,7 +37,6 @@ def processing():
     if data['type'] == 'confirmation':
         return settings.CONFIRM_TOKEN
     if data['type'] == 'message_new':
-        message_handler.respond(data['object']['message'])
-        return 'ok'
+        return 'ok' if message_handler.respond(data['object']['message']) else 'error'
 
     return 'Unsupported Media Type'

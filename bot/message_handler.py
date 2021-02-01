@@ -1,8 +1,7 @@
-import os
 import importlib
+import os
 
 import monitoring
-
 import vkapi
 from handlers_system import command_list, event_list
 
@@ -34,7 +33,7 @@ def invoke_command(data):
     return text
 
 
-def respond(data):
+def respond(data: dict) -> bool:
     load_modules("command-handlers")
     load_modules("event-handlers")
 
@@ -49,3 +48,5 @@ def respond(data):
 
     if text:
         vkapi.send_message(text, peer_id, reply_to)
+        return True
+    return False
