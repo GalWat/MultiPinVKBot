@@ -7,7 +7,7 @@ sentry_sdk.init(
     integrations=[FlaskIntegration()],
     traces_sample_rate=0.0,
     release=settings.RELEASE,
-    environment=settings.ENV,
+    environment=settings.ENV
 )
 
 from flask import Flask, request, json
@@ -17,26 +17,26 @@ import message_handler
 app = Flask(__name__)
 
 
-@app.route("/debug-sentry")
+@app.route('/debug-sentry')
 def raise_error():
     1 / 0
 
 
-@app.route("/")
+@app.route('/')
 def website_access():
-    return "This is a VK bot, not website."
+    return 'This is a VK bot, not website.'
 
 
-@app.route("/", methods=["POST"])
+@app.route('/', methods=['POST'])
 def processing():
     data = json.loads(request.data)
 
-    if "type" not in data.keys():
-        return "not vk"
+    if 'type' not in data.keys():
+        return 'not vk'
 
-    if data["type"] == "confirmation":
+    if data['type'] == 'confirmation':
         return settings.CONFIRM_TOKEN
-    if data["type"] == "message_new":
-        return "ok" if message_handler.respond(data["object"]["message"]) else "error"
+    if data['type'] == 'message_new':
+        return 'ok' if message_handler.respond(data['object']['message']) else 'error'
 
-    return "Unsupported Media Type"
+    return 'Unsupported Media Type'

@@ -5,12 +5,12 @@ event_list = []
 class Handler:
     def __init__(self):
         self.__keys = []
-        self.description = ""
+        self.description = ''
 
     @property
     def keys(self):
         return self.__keys
-
+    
     @keys.setter
     def keys(self, mas):
         for key in mas:
