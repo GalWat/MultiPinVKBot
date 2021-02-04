@@ -1,9 +1,9 @@
 import importlib
 import os
 
-import monitoring
-import vkapi
-from handlers_system import command_list, event_list
+import sentry_decorators
+import vk_api
+# from handlers.base_handler import command_list, event_list
 
 
 def load_modules(module_type):
@@ -13,7 +13,7 @@ def load_modules(module_type):
         importlib.import_module(f"{module_type}.{m[0:-3]}")
 
 
-@monitoring.transaction
+@sentry_decorators.transaction
 def invoke_event(data):
     key = data["action"]["type"]
     text = ""
@@ -23,7 +23,7 @@ def invoke_event(data):
     return text
 
 
-@monitoring.transaction
+@sentry_decorators.transaction
 def invoke_command(data):
     key = data["text"].lower()
     text = ""
@@ -33,9 +33,9 @@ def invoke_command(data):
     return text
 
 
-def respond(data: dict) -> bool:
-    load_modules("command-handlers")
-    load_modules("event-handlers")
+def respond_on(data: dict) -> bool:
+    load_modules("command_handlers")
+    load_modules("event_handlers")
 
     peer_id = data["peer_id"]  # Conversation or user id (depends on where message received)
     reply_to = data["id"]
@@ -47,6 +47,6 @@ def respond(data: dict) -> bool:
         text = invoke_command(data)
 
     if text:
-        vkapi.send_message(text, peer_id, reply_to)
+        vk_api.send_message(text, peer_id, reply_to)
         return True
     return False

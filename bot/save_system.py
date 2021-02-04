@@ -1,6 +1,6 @@
 import datetime
 
-import vkapi
+import vk_api
 
 pinned_messages = {}
 
@@ -9,7 +9,7 @@ def add(data):  # Silence global statement issue (will be fixed in future) skipc
     global pinned_messages
     peer_id = data["peer_id"]
     pinned_messages.setdefault(peer_id, [])
-    message = vkapi.get_messages_by_ids(
+    message = vk_api.get_messages_by_ids(
         peer_id, data["action"]["conversation_message_id"]
     )["items"][0]
     date = datetime.datetime.fromtimestamp(message["date"])

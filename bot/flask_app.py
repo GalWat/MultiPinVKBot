@@ -1,17 +1,9 @@
-import settings
-import sentry_sdk
-from sentry_sdk.integrations.flask import FlaskIntegration
-
-sentry_sdk.init(
-    dsn=settings.SENTRY_DSN,
-    integrations=[FlaskIntegration()],
-    traces_sample_rate=0.0,
-    release=settings.RELEASE,
-    environment=settings.ENV
-)
-
 from flask import Flask, request, json
-import message_handler
+
+import sentry_init
+
+import settings
+import vk_events_responder
 
 
 app = Flask(__name__)
@@ -37,6 +29,6 @@ def processing():
     if data['type'] == 'confirmation':
         return settings.CONFIRM_TOKEN
     if data['type'] == 'message_new':
-        return 'ok' if message_handler.respond(data['object']['message']) else 'error'
+        return 'ok' if vk_events_responder.respond_on(data['object']['message']) else 'error'
 
     return 'Unsupported Media Type'
